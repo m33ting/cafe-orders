@@ -1,320 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café Order Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Ordering Form</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f1ea;
+        margin: 0;
+        padding: 20px;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f1ea;
-            margin: 0;
-            padding: 20px;
-        }
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-        }
+    h1 {
+        text-align: center;
+        color: #6b4226;
+    }
 
-        h1 {
-            text-align: center;
-            color: #6b4226;
-            margin-bottom: 30px;
-        }
+    h2 {
+        color: #6b4226;
+        margin-top: 25px;
+    }
 
-        h2 {
-            color: #6b4226;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-            margin-top: 30px;
-        }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
 
-        h3 {
-            color: #805331;
-            margin-top: 25px;
-        }
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 12px;
-            color: #333;
-        }
+    .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        padding: 10px;
+        background: #faf7f2;
+        border-radius: 5px;
+    }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 11px;
-            margin-top: 6px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 15px;
-        }
+    .qty {
+        width: 80px;
+    }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #6b4226;
-        }
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #6b4226;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #faf7f2;
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-        }
-
-        .item-name {
-            font-size: 16px;
-        }
-
-        .qty {
-            width: 80px;
-            margin: 0;
-            text-align: center;
-        }
-
-        #cart {
-            background: #faf7f2;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            background: white;
-            padding: 10px;
-            margin-bottom: 6px;
-            border-radius: 6px;
-        }
-
-        .cart-total {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 15px;
-            padding-top: 12px;
-            border-top: 2px solid #ddd;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            margin-top: 20px;
-            border: none;
-            border-radius: 8px;
-            background: #6b4226;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #54331d;
-        }
-
-        button:disabled {
-            background: #999;
-            cursor: not-allowed;
-        }
-
-        #message {
-            display: none;
-            text-align: center;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .success {
-            background: #d9f2df;
-            color: #246b35;
-        }
-
-        .error {
-            background: #f8d7da;
-            color: #842029;
-        }
-    </style>
+    button:hover {
+        background-color: #54331d;
+    }
+</style>
 </head>
-
 <body>
 
 <div class="container">
+    <h1>☕ Cafe Order Form</h1>
 
-    <h1>☕ Café Order Form</h1>
-
-    <form action="https://formsubmit.co/harryprior@btinternet.com" method="POST" />
-
-        <!-- CUSTOMER INFORMATION -->
+    <form action="https://formsubmit.co/harryprior@btinternet.com" method="post">
 
         <h2>Customer Information</h2>
 
         <label for="name">Full Name</label>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder="Enter your name"
-        >
+        <input type="text" id="name" name="name" required>
 
-        <label for="orderType">Order Type</label>
-        <select id="orderType" name="orderType">
-            <option value="Dine In">Dine In</option>
-            <option value="Take Away">Take Away</option>
-             <option value="delivery">delivery</option>
+        <label for="pickup">Order Type</label>
+        <select id="pickup" name="pickup">
+            <option value="pickup">Pickup</option>
+            <option value="dinein">Dine In</option>
+            <option value="delivery">Delivery</option>
         </select>
 
+<div class="menu-item">
+    <span>Coffee</span>
+    <input class="qty" type="number" name="coffee" min="0" value="0">
+</div>
 
-        <!-- MENU -->
+<div class="menu-item">
+    <span>Tea</span>
+    <input class="qty" type="number" name="tea" min="0" value="0">
+</div>
 
-        <h2>Menu</h2>
+<div class="menu-item">
+    <span>Water</span>
+    <input class="qty" type="number" name="water" min="0" value="0">
+</div>
 
-        <h3>🥤 Drinks</h3>
+<div class="menu-item">
+    <span>Apple & Blackcurrant Squash</span>
+    <input class="qty" type="number" name="apple_blackcurrant_squash" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Coffee</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Coffee">
-        </div>
+<div class="menu-item">
+    <span>Orange & Pineapple Squash</span>
+    <input class="qty" type="number" name="orange_pineapple_squash" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Tea</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Tea">
-        </div>
+<div class="menu-item">
+    <span>Cola</span>
+    <input class="qty" type="number" name="cola" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Water</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Water">
-        </div>
+<div class="menu-item">
+    <span>Milk</span>
+    <input class="qty" type="number" name="milk" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Apple & Blackcurrant Squash</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Apple & Blackcurrant Squash">
-        </div>
+<h3>Snacks</h3>
 
-        <div class="menu-item">
-            <span class="item-name">Orange & Pineapple Squash</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Orange & Pineapple Squash">
-        </div>
+<div class="menu-item">
+    <span>Ritz Crackers</span>
+    <input class="qty" type="number" name="ritz_crackers" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Cola</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Cola">
-        </div>
+<div class="menu-item">
+    <span>Pom Bears</span>
+    <input class="qty" type="number" name="pom_bears" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Milk</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Milk">
-        </div>
+<div class="menu-item">
+    <span>Crackers & Butter</span>
+    <input class="qty" type="number" name="crackers_butter" min="0" value="0">
+</div>
 
+<div class="menu-item">
+    <span>Fruit Salad</span>
+    <input class="qty" type="number" name="fruit_salad" min="0" value="0">
+</div>
 
-        <h3>🍪 Snacks</h3>
+<h3>Breakfast</h3>
 
-        <div class="menu-item">
-            <span class="item-name">Ritz Crackers</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Ritz Crackers">
-        </div>
+<div class="menu-item">
+    <span>Toast</span>
+    <input class="qty" type="number" name="toast" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Pom Bears</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Pom Bears">
-        </div>
+<div class="menu-item">
+    <span>Shreddies</span>
+    <input class="qty" type="number" name="shreddies" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Crackers & Butter</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Crackers & Butter">
-        </div>
+<div class="menu-item">
+    <span>Chocolate Shreddies</span>
+    <input class="qty" type="number" name="choc_shreddies" min="0" value="0">
+</div>
 
-        <div class="menu-item">
-            <span class="item-name">Fruit Salad</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Fruit Salad">
-        </div>
+<div class="menu-item">
+    <span>Rice Krispies</span>
+    <input class="qty" type="number" name="rice_krispies" min="0" value="0">
+</div>
 
+<div class="menu-item">
+    <span>Porridge</span>
+    <input class="qty" type="number" name="porridge" min="0" value="0">
+</div>
 
-        <h3>🥣 Breakfast</h3>
+        <label for="notes">Special Instructions</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Extra hot, oat milk, no sugar, etc."></textarea>
 
-        <div class="menu-item">
-            <span class="item-name">Toast</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Toast">
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">Shreddies</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Shreddies">
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">Chocolate Shreddies</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Chocolate Shreddies">
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">Rice Krispies</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Rice Krispies">
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">Porridge</span>
-            <input class="qty" type="number" min="0" value="0"
-                   data-item="Porridge">
-        </div>
-
-
-        <!-- SPECIAL INSTRUCTIONS -->
-
-        <h2>Special Instructions</h2>
-
-        <textarea
-            id="notes"
-            name="notes"
-            rows="4"
-            placeholder="Any special requests or dietary requirements?"
-        ></textarea>
-
-        <!-- SUBMIT -->
-
-        <button type="submit" id="submitButton">
-            Place Order
-        </button>
-
-        <div id="message"></div>
+        <button type="submit">Place Order</button>
 
     </form>
-
 </div>
 
 </body>
