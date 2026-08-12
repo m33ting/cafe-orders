@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cafe Ordering Form</title>
+<title>Café Ordering Form</title>
 
 <style>
     body {
@@ -14,27 +14,25 @@
     }
 
     .container {
-        max-width: 700px;
+        max-width: 800px;
         margin: auto;
         background: white;
         padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1, h2, h3 {
+        color: #6b4226;
     }
 
     h1 {
         text-align: center;
-        color: #6b4226;
-    }
-
-    h2 {
-        color: #6b4226;
-        margin-top: 25px;
     }
 
     label {
         display: block;
-        margin-top: 10px;
+        margin-top: 12px;
         font-weight: bold;
     }
 
@@ -43,7 +41,7 @@
         padding: 10px;
         margin-top: 5px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 6px;
         box-sizing: border-box;
     }
 
@@ -51,14 +49,31 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 10px 0;
-        padding: 10px;
         background: #faf7f2;
-        border-radius: 5px;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 8px;
     }
 
     .qty {
         width: 80px;
+    }
+
+    #cart {
+        background: #faf7f2;
+        border-radius: 8px;
+        padding: 15px;
+        min-height: 50px;
+        margin-top: 10px;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        background: white;
+        margin-bottom: 5px;
+        border-radius: 5px;
     }
 
     button {
@@ -67,10 +82,10 @@
         background-color: #6b4226;
         color: white;
         border: none;
-        border-radius: 5px;
-        margin-top: 20px;
+        border-radius: 6px;
         font-size: 16px;
         cursor: pointer;
+        margin-top: 20px;
     }
 
     button:hover {
@@ -81,61 +96,168 @@
 <body>
 
 <div class="container">
-    <h1>☕ Cafe Order Form</h1>
+
+    <h1>☕ Café Order Form</h1>
 
     <form action="https://hook.eu1.make.com/vw9qmjz5prp5k4ijhtui612mhp5xuooi" method="post">
 
         <h2>Customer Information</h2>
 
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" required>
 
-        <label for="pickup">Order Type</label>
-        <select id="pickup" name="pickup">
-            <option value="pickup">Pickup</option>
-            <option value="dinein">Dine In</option>
-            <option value="delivery">Delivery</option>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+
+        <label for="orderType">Order Type</label>
+        <select id="orderType">
+            <option>Dine In</option>
+            <option>Take Away</option>
         </select>
 
         <h2>Menu</h2>
 
+        <h3>Drinks</h3>
+
         <div class="menu-item">
-            <span>Espresso (£2.50)</span>
-            <input class="qty" type="number" name="espresso" min="0" value="0">
+            <span>Coffee</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Coffee">
         </div>
 
         <div class="menu-item">
-            <span>Cappuccino (£3.50)</span>
-            <input class="qty" type="number" name="cappuccino" min="0" value="0">
+            <span>Tea</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Tea">
         </div>
 
         <div class="menu-item">
-            <span>Latte (£3.75)</span>
-            <input class="qty" type="number" name="latte" min="0" value="0">
+            <span>Water</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Water">
         </div>
 
         <div class="menu-item">
-            <span>Mocha (£4.00)</span>
-            <input class="qty" type="number" name="mocha" min="0" value="0">
+            <span>Apple & Blackcurrant Squash</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Apple & Blackcurrant Squash">
         </div>
 
         <div class="menu-item">
-            <span>Croissant (£2.25)</span>
-            <input class="qty" type="number" name="croissant" min="0" value="0">
+            <span>Orange & Pineapple Squash</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Orange & Pineapple Squash">
         </div>
 
         <div class="menu-item">
-            <span>Blueberry Muffin (£2.75)</span>
-            <input class="qty" type="number" name="muffin" min="0" value="0">
+            <span>Cola</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Cola">
+        </div>
+
+        <div class="menu-item">
+            <span>Milk</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Milk">
+        </div>
+
+        <h3>Snacks</h3>
+
+        <div class="menu-item">
+            <span>Ritz Crackers</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Ritz Crackers">
+        </div>
+
+        <div class="menu-item">
+            <span>Pom Bears</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Pom Bears">
+        </div>
+
+        <div class="menu-item">
+            <span>Crackers & Butter</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Crackers & Butter">
+        </div>
+
+        <div class="menu-item">
+            <span>Fruit Salad</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Fruit Salad">
+        </div>
+
+        <h3>Breakfast</h3>
+
+        <div class="menu-item">
+            <span>Toast</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Toast">
+        </div>
+
+        <div class="menu-item">
+            <span>Shreddies</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Shreddies">
+        </div>
+
+        <div class="menu-item">
+            <span>Chocolate Shreddies</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Chocolate Shreddies">
+        </div>
+
+        <div class="menu-item">
+            <span>Rice Krispies</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Rice Krispies">
+        </div>
+
+        <div class="menu-item">
+            <span>Porridge</span>
+            <input class="qty" type="number" min="0" value="0" data-item="Porridge">
         </div>
 
         <label for="notes">Special Instructions</label>
-        <textarea id="notes" name="notes" rows="4" placeholder="Extra hot, oat milk, no sugar, etc."></textarea>
+        <textarea id="notes" rows="4" placeholder="Any dietary requirements or requests..."></textarea>
+
+        <h2>🛒 Order Summary</h2>
+
+        <div id="cart">
+            <p>No items selected.</p>
+        </div>
+
+        <p><strong>Total Items:</strong> <span id="totalItems">0</span></p>
 
         <button type="submit">Place Order</button>
 
     </form>
+
 </div>
+
+<script>
+const quantities = document.querySelectorAll('.qty');
+const cart = document.getElementById('cart');
+const totalItems = document.getElementById('totalItems');
+
+function updateCart() {
+    let html = '';
+    let total = 0;
+
+    quantities.forEach(input => {
+        const qty = parseInt(input.value) || 0;
+
+        if (qty > 0) {
+            html += `
+                <div class="cart-item">
+                    <span>${input.dataset.item}</span>
+                    <strong>x${qty}</strong>
+                </div>
+            `;
+            total += qty;
+        }
+    });
+
+    if (total === 0) {
+        cart.innerHTML = '<p>No items selected.</p>';
+    } else {
+        cart.innerHTML = html;
+    }
+
+    totalItems.textContent = total;
+}
+
+quantities.forEach(input => {
+    input.addEventListener('input', updateCart);
+});
+
+updateCart();
+</script>
 
 </body>
 </html>
