@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Ordering Form</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f1ea;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #6b4226;
+    }
+
+    h2 {
+        color: #6b4226;
+        margin-top: 25px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        padding: 10px;
+        background: #faf7f2;
+        border-radius: 5px;
+    }
+
+    .qty {
+        width: 80px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #6b4226;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #54331d;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>☕ Cafe Order Form</h1>
+
+    <form action="#" method="post">
+
+        <h2>Customer Information</h2>
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="pickup">Order Type</label>
+        <select id="pickup" name="pickup">
+            <option value="pickup">Pickup</option>
+            <option value="dinein">Dine In</option>
+            <option value="delivery">Delivery</option>
+        </select>
+
+        <h2>Menu</h2>
+
+        <div class="menu-item">
+            <span>Espresso (£2.50)</span>
+            <input class="qty" type="number" name="espresso" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <span>Cappuccino (£3.50)</span>
+            <input class="qty" type="number" name="cappuccino" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <span>Latte (£3.75)</span>
+            <input class="qty" type="number" name="latte" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <span>Mocha (£4.00)</span>
+            <input class="qty" type="number" name="mocha" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <span>Croissant (£2.25)</span>
+            <input class="qty" type="number" name="croissant" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <span>Blueberry Muffin (£2.75)</span>
+            <input class="qty" type="number" name="muffin" min="0" value="0">
+        </div>
+
+        <label for="notes">Special Instructions</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Extra hot, oat milk, no sugar, etc."></textarea>
+
+        <button type="submit">Place Order</button>
+
+    </form>
+</div>
+
+</body>
+</html>
