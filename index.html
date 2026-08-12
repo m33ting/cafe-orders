@@ -1,210 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Café Ordering Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Order Form</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f1ea;
-        margin: 0;
-        padding: 20px;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1ea;
+            margin: 0;
+            padding: 20px;
+        }
 
-    h1, h2, h3 {
-        color: #6b4226;
-    }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
 
-    h1 {
-        text-align: center;
-    }
+        h1 {
+            text-align: center;
+            color: #6b4226;
+            margin-bottom: 30px;
+        }
 
-    label {
-        display: block;
-        margin-top: 12px;
-        font-weight: bold;
-    }
+        h2 {
+            color: #6b4226;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
 
-    input, select, textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        box-sizing: border-box;
-    }
+        h3 {
+            color: #805331;
+            margin-top: 25px;
+        }
 
-    .menu-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #faf7f2;
-        padding: 10px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-    }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 12px;
+            color: #333;
+        }
 
-    .qty {
-        width: 80px;
-    }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
 
-    #cart {
-        background: #faf7f2;
-        border-radius: 8px;
-        padding: 15px;
-        min-height: 50px;
-        margin-top: 10px;
-    }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6b4226;
+        }
 
-    .cart-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px;
-        background: white;
-        margin-bottom: 5px;
-        border-radius: 5px;
-    }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #faf7f2;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
 
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #6b4226;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
+        .item-name {
+            font-size: 16px;
+        }
 
-    button:hover {
-        background-color: #54331d;
-    }
-</style>
+        .qty {
+            width: 80px;
+            margin: 0;
+            text-align: center;
+        }
+
+        #cart {
+            background: #faf7f2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            background: white;
+            padding: 10px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+        }
+
+        .cart-total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 2px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6b4226;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #54331d;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        #message {
+            display: none;
+            text-align: center;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d9f2df;
+            color: #246b35;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="container">
 
     <h1>☕ Café Order Form</h1>
 
-    <form action="https://hook.eu1.make.com/vw9qmjz5prp5k4ijhtui612mhp5xuooi" method="post">
+    <form id="orderForm">
+
+        <!-- CUSTOMER INFORMATION -->
 
         <h2>Customer Information</h2>
 
         <label for="name">Full Name</label>
-        <input type="text" id="name" required>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter your name"
+        >
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" required>
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            placeholder="Enter your phone number"
+        >
 
         <label for="orderType">Order Type</label>
-        <select id="orderType">
-            <option>Dine In</option>
-            <option>Take Away</option>
+        <select id="orderType" name="orderType">
+            <option value="Dine In">Dine In</option>
+            <option value="Take Away">Take Away</option>
         </select>
+
+
+        <!-- MENU -->
 
         <h2>Menu</h2>
 
-        <h3>Drinks</h3>
+        <h3>🥤 Drinks</h3>
 
         <div class="menu-item">
-            <span>Coffee</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Coffee">
+            <span class="item-name">Coffee</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Coffee">
         </div>
 
         <div class="menu-item">
-            <span>Tea</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Tea">
+            <span class="item-name">Tea</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Tea">
         </div>
 
         <div class="menu-item">
-            <span>Water</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Water">
+            <span class="item-name">Water</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Water">
         </div>
 
         <div class="menu-item">
-            <span>Apple & Blackcurrant Squash</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Apple & Blackcurrant Squash">
+            <span class="item-name">Apple & Blackcurrant Squash</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Apple & Blackcurrant Squash">
         </div>
 
         <div class="menu-item">
-            <span>Orange & Pineapple Squash</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Orange & Pineapple Squash">
+            <span class="item-name">Orange & Pineapple Squash</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Orange & Pineapple Squash">
         </div>
 
         <div class="menu-item">
-            <span>Cola</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Cola">
+            <span class="item-name">Cola</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Cola">
         </div>
 
         <div class="menu-item">
-            <span>Milk</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Milk">
+            <span class="item-name">Milk</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Milk">
         </div>
 
-        <h3>Snacks</h3>
+
+        <h3>🍪 Snacks</h3>
 
         <div class="menu-item">
-            <span>Ritz Crackers</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Ritz Crackers">
-        </div>
-
-        <div class="menu-item">
-            <span>Pom Bears</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Pom Bears">
+            <span class="item-name">Ritz Crackers</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Ritz Crackers">
         </div>
 
         <div class="menu-item">
-            <span>Crackers & Butter</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Crackers & Butter">
+            <span class="item-name">Pom Bears</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Pom Bears">
         </div>
 
         <div class="menu-item">
-            <span>Fruit Salad</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Fruit Salad">
-        </div>
-
-        <h3>Breakfast</h3>
-
-        <div class="menu-item">
-            <span>Toast</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Toast">
+            <span class="item-name">Crackers & Butter</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Crackers & Butter">
         </div>
 
         <div class="menu-item">
-            <span>Shreddies</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Shreddies">
+            <span class="item-name">Fruit Salad</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Fruit Salad">
+        </div>
+
+
+        <h3>🥣 Breakfast</h3>
+
+        <div class="menu-item">
+            <span class="item-name">Toast</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Toast">
         </div>
 
         <div class="menu-item">
-            <span>Chocolate Shreddies</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Chocolate Shreddies">
+            <span class="item-name">Shreddies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Shreddies">
         </div>
 
         <div class="menu-item">
-            <span>Rice Krispies</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Rice Krispies">
+            <span class="item-name">Chocolate Shreddies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Chocolate Shreddies">
         </div>
 
         <div class="menu-item">
-            <span>Porridge</span>
-            <input class="qty" type="number" min="0" value="0" data-item="Porridge">
+            <span class="item-name">Rice Krispies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Rice Krispies">
         </div>
 
-        <label for="notes">Special Instructions</label>
-        <textarea id="notes" rows="4" placeholder="Any dietary requirements or requests..."></textarea>
+        <div class="menu-item">
+            <span class="item-name">Porridge</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Porridge">
+        </div>
+
+
+        <!-- SPECIAL INSTRUCTIONS -->
+
+        <h2>Special Instructions</h2>
+
+        <textarea
+            id="notes"
+            name="notes"
+            rows="4"
+            placeholder="Any special requests or dietary requirements?"
+        ></textarea>
+
+
+        <!-- SHOPPING CART -->
 
         <h2>🛒 Order Summary</h2>
 
@@ -212,39 +322,77 @@
             <p>No items selected.</p>
         </div>
 
-        <p><strong>Total Items:</strong> <span id="totalItems">0</span></p>
+        <div class="cart-total">
+            Total Items: <span id="totalItems">0</span>
+        </div>
 
-        <button type="submit">Place Order</button>
+
+        <!-- SUBMIT -->
+
+        <button type="submit" id="submitButton">
+            Place Order
+        </button>
+
+        <div id="message"></div>
 
     </form>
 
 </div>
 
+
 <script>
-const quantities = document.querySelectorAll('.qty');
-const cart = document.getElementById('cart');
-const totalItems = document.getElementById('totalItems');
+
+/* =========================================
+   MAKE WEBHOOK
+   Replace the URL below with your Make
+   Custom Webhook URL.
+   ========================================= */
+
+const webhookURL =
+    "https://hook.eu1.make.com/vw9qmjz5prp5k4ijhtui612mhp5xuooi";
+
+
+/* =========================================
+   CART
+   ========================================= */
+
+const quantities = document.querySelectorAll(".qty");
+const cart = document.getElementById("cart");
+const totalItems = document.getElementById("totalItems");
+
 
 function updateCart() {
-    let html = '';
+
+    let html = "";
     let total = 0;
 
     quantities.forEach(input => {
-        const qty = parseInt(input.value) || 0;
 
-        if (qty > 0) {
+        let quantity = parseInt(input.value) || 0;
+
+        if (quantity < 0) {
+            quantity = 0;
+            input.value = 0;
+        }
+
+        if (quantity > 0) {
+
+            const itemName = input.dataset.item;
+
             html += `
                 <div class="cart-item">
-                    <span>${input.dataset.item}</span>
-                    <strong>x${qty}</strong>
+                    <span>${itemName}</span>
+                    <strong>x${quantity}</strong>
                 </div>
             `;
-            total += qty;
+
+            total += quantity;
         }
     });
 
+
     if (total === 0) {
-        cart.innerHTML = '<p>No items selected.</p>';
+        cart.innerHTML = "<p>No items selected.</p>";
     } else {
         cart.innerHTML = html;
     }
@@ -252,11 +400,205 @@ function updateCart() {
     totalItems.textContent = total;
 }
 
+
 quantities.forEach(input => {
-    input.addEventListener('input', updateCart);
+    input.addEventListener("input", updateCart);
 });
 
+
 updateCart();
+
+
+/* =========================================
+   GET QUANTITY
+   ========================================= */
+
+function getQuantity(itemName) {
+
+    const input = [...document.querySelectorAll(".qty")]
+        .find(input => input.dataset.item === itemName);
+
+    return input ? Number(input.value) || 0 : 0;
+}
+
+
+/* =========================================
+   SHOW MESSAGE
+   ========================================= */
+
+function showMessage(text, type) {
+
+    const message = document.getElementById("message");
+
+    message.textContent = text;
+    message.className = type;
+    message.style.display = "block";
+}
+
+
+/* =========================================
+   SEND ORDER TO MAKE
+   ========================================= */
+
+document
+    .getElementById("orderForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const submitButton =
+            document.getElementById("submitButton");
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending Order...";
+
+
+        const order = {
+
+            date: new Date().toLocaleString("en-GB"),
+
+            customerName:
+                document.getElementById("name").value,
+
+            phone:
+                document.getElementById("phone").value,
+
+            orderType:
+                document.getElementById("orderType").value,
+
+
+            coffee:
+                getQuantity("Coffee"),
+
+            tea:
+                getQuantity("Tea"),
+
+            water:
+                getQuantity("Water"),
+
+            appleBlackcurrantSquash:
+                getQuantity("Apple & Blackcurrant Squash"),
+
+            orangePineappleSquash:
+                getQuantity("Orange & Pineapple Squash"),
+
+            cola:
+                getQuantity("Cola"),
+
+            milk:
+                getQuantity("Milk"),
+
+
+            ritzCrackers:
+                getQuantity("Ritz Crackers"),
+
+            pomBears:
+                getQuantity("Pom Bears"),
+
+            crackersButter:
+                getQuantity("Crackers & Butter"),
+
+            fruitSalad:
+                getQuantity("Fruit Salad"),
+
+
+            toast:
+                getQuantity("Toast"),
+
+            shreddies:
+                getQuantity("Shreddies"),
+
+            chocolateShreddies:
+                getQuantity("Chocolate Shreddies"),
+
+            riceKrispies:
+                getQuantity("Rice Krispies"),
+
+            porridge:
+                getQuantity("Porridge"),
+
+
+            specialInstructions:
+                document.getElementById("notes").value,
+
+            totalItems:
+                Number(document.getElementById("totalItems").textContent)
+        };
+
+
+        /* Make sure at least one item was ordered */
+
+        if (order.totalItems === 0) {
+
+            showMessage(
+                "Please select at least one item.",
+                "error"
+            );
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Place Order";
+
+            return;
+        }
+
+
+        /* Send order */
+
+        try {
+
+            const response = await fetch(
+                webhookURL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(order)
+                }
+            );
+
+
+            if (response.ok) {
+
+                showMessage(
+                    "✅ Order sent successfully!",
+                    "success"
+                );
+
+                document
+                    .getElementById("orderForm")
+                    .reset();
+
+                updateCart();
+
+            } else {
+
+                showMessage(
+                    "❌ The order could not be sent.",
+                    "error"
+                );
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                "❌ Could not connect to the ordering system.",
+                "error"
+            );
+
+        }
+
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Place Order";
+
+    });
+
 </script>
 
 </body>
