@@ -25,16 +25,19 @@
     h1 {
         text-align: center;
         color: #6b4226;
+        margin-bottom: 10px;
     }
 
     h2 {
         color: #6b4226;
-        margin-top: 25px;
+        margin-top: 30px;
+        border-bottom: 2px solid #e0d6c8;
+        padding-bottom: 5px;
     }
 
     label {
         display: block;
-        margin-top: 10px;
+        margin-top: 15px;
         font-weight: bold;
     }
 
@@ -55,6 +58,16 @@
         padding: 10px;
         background: #faf7f2;
         border-radius: 5px;
+        transition: background 0.2s;
+    }
+
+    .menu-item:hover {
+        background: #f0e9df;
+    }
+
+    .menu-item span {
+        flex: 1;
+        font-weight: bold;
     }
 
     .qty {
@@ -68,7 +81,7 @@
         color: white;
         border: none;
         border-radius: 5px;
-        margin-top: 20px;
+        margin-top: 25px;
         font-size: 16px;
         cursor: pointer;
     }
@@ -85,6 +98,9 @@
 
     <form action="https://formsubmit.co/harryprior@btinternet.com" method="post">
 
+        <!-- Anti-spam -->
+        <input type="text" name="_honey" style="display:none">
+
         <h2>Customer Information</h2>
 
         <label for="name">Full Name</label>
@@ -94,99 +110,95 @@
         <input type="tel" id="phone" name="phone" required>
 
         <label for="pickup">Order Type</label>
-        <select id="pickup" name="pickup">
+        <select id="pickup" name="pickup" required>
             <option value="pickup">Pickup</option>
             <option value="dinein">Dine In</option>
             <option value="delivery">Delivery</option>
         </select>
 
-<h2>Menu</h2>
+        <h2>Menu</h2>
 
-<h3>Drinks</h3>
+        <h3>Drinks</h3>
 
-<div class="menu-item">
-    <span>Coffee</span>
-    <input class="qty" type="number" name="coffee" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Coffee</span>
+            <input class="qty" type="number" name="coffee" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Tea</span>
-    <input class="qty" type="number" name="tea" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Tea</span>
+            <input class="qty" type="number" name="tea" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Water</span>
-    <input class="qty" type="number" name="water" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Water</span>
+            <input class="qty" type="number" name="water" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Apple & Blackcurrant Squash</span>
-    <input class="qty" type="number" name="apple_blackcurrant_squash" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Apple & Blackcurrant Squash</span>
+            <input class="qty" type="number" name="apple_blackcurrant_squash" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Orange & Pineapple Squash</span>
-    <input class="qty" type="number" name="orange_pineapple_squash" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Orange & Pineapple Squash</span>
+            <input class="qty" type="number" name="orange_pineapple_squash" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Cola</span>
-    <input class="qty" type="number" name="cola" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Cola</span>
+            <input class="qty" type="number" name="cola" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Milk</span>
-    <input class="qty" type="number" name="milk" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Milk</span>
+            <input class="qty" type="number" name="milk" min="0" max="10" value="0">
+        </div>
 
-<h3>Snacks</h3>
+        <h3>Snacks</h3>
 
-<div class="menu-item">
-    <span>Ritz Crackers</span>
-    <input class="qty" type="number" name="ritz_crackers" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Ritz Crackers</span>
+            <input class="qty" type="number" name="ritz_crackers" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Pom Bears</span>
-    <input class="qty" type="number" name="pom_bears" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Pom Bears</span>
+            <input class="qty" type="number" name="pom_bears" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Crackers & Butter</span>
-    <input class="qty" type="number" name="crackers_butter" min="0" value="0">
-</div>
 
-<div class="menu-item">
-    <span>Fruit Salad</span>
-    <input class="qty" type="number" name="fruit_salad" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Fruit Salad</span>
+            <input class="qty" type="number" name="fruit_salad" min="0" max="10" value="0">
+        </div>
 
-<h3>Breakfast</h3>
+        <h3>Breakfast</h3>
 
-<div class="menu-item">
-    <span>Toast</span>
-    <input class="qty" type="number" name="toast" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Toast</span>
+            <input class="qty" type="number" name="toast" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Shreddies</span>
-    <input class="qty" type="number" name="shreddies" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Shreddies</span>
+            <input class="qty" type="number" name="shreddies" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Chocolate Shreddies</span>
-    <input class="qty" type="number" name="choc_shreddies" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Chocolate Shreddies</span>
+            <input class="qty" type="number" name="choc_shreddies" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Rice Krispies</span>
-    <input class="qty" type="number" name="rice_krispies" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Rice Krispies</span>
+            <input class="qty" type="number" name="rice_krispies" min="0" max="10" value="0">
+        </div>
 
-<div class="menu-item">
-    <span>Porridge</span>
-    <input class="qty" type="number" name="porridge" min="0" value="0">
-</div>
+        <div class="menu-item">
+            <span>Porridge</span>
+            <input class="qty" type="number" name="porridge" min="0" max="10" value="0">
+        </div>
 
         <label for="notes">Special Instructions</label>
         <textarea id="notes" name="notes" rows="4" placeholder="Extra hot, oat milk, no sugar, etc."></textarea>
