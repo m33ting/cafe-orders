@@ -1,118 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pancake Ordering Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Order Form</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f1ea;
-        margin: 0;
-        padding: 20px;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .container {
-        max-width: 700px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1ea;
+            margin: 0;
+            padding: 20px;
+        }
 
-    h1 {
-        text-align: center;
-        color: #6b4226;
-    }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
 
-    h2 {
-        color: #6b4226;
-        margin-top: 25px;
-    }
+        h1 {
+            text-align: center;
+            color: #6b4226;
+            margin-bottom: 30px;
+        }
 
-    label {
-        display: block;
-        margin-top: 10px;
-        font-weight: bold;
-    }
+        h2 {
+            color: #6b4226;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
 
-    input, select, textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
+        h3 {
+            color: #805331;
+            margin-top: 25px;
+        }
 
-    .menu-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 10px 0;
-        padding: 10px;
-        background: #faf7f2;
-        border-radius: 5px;
-    }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 12px;
+            color: #333;
+        }
 
-    .qty {
-        width: 80px;
-    }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
 
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #6b4226;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        margin-top: 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6b4226;
+        }
 
-    button:hover {
-        background-color: #54331d;
-    }
-</style>
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #faf7f2;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .item-name {
+            font-size: 16px;
+        }
+
+        .qty {
+            width: 80px;
+            margin: 0;
+            text-align: center;
+        }
+
+        #cart {
+            background: #faf7f2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            background: white;
+            padding: 10px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+        }
+
+        .cart-total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 2px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6b4226;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #54331d;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        #message {
+            display: none;
+            text-align: center;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d9f2df;
+            color: #246b35;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h1>Pancake Order Form</h1>
 
-    <form action="https://formsubmit.co/harryprior@btinternet.com" method="post">
+    <h1>☕ Café Order Form</h1>
+
+    <form action="https://formsubmit.co/harryprior@btinternet.com" method="POST" />
+
+        <!-- CUSTOMER INFORMATION -->
 
         <h2>Customer Information</h2>
 
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter your name"
+        >
+
+        <label for="orderType">Order Type</label>
+        <select id="orderType" name="orderType">
+            <option value="Dine In">Dine In</option>
+            <option value="Take Away">Take Away</option>
+             <option value="delivery">delivery</option>
+        </select>
+
+
+        <!-- MENU -->
 
         <h2>Menu</h2>
 
-                <label for="pancake type">pancake type</label>
-        <select id="pancake type" name="pancake type">
-            <option value="american type">american type</option>
-            <option value="crepe">crepe</option>
-        </select> 
-        
-        <label for="pancake">pancake topping</label>
-        <select id="pancake" name="pancake topping">
-            <option value="nutella">nuttella</option>
-            <option value="banana + nuttella">banana + nuttella</option>
-            <option value="maple syrup">maple syrup</option>
-            <option value="bacon">bacon</option>
-            <option value="nuttella + strawberrys">nuttella + strawberrys</option>
-        </select>
+        <h3>🥤 Drinks</h3>
 
-        <label for="notes">Special Instructions</label>
-        <textarea id="notes" name="notes" rows="4" placeholder="Extra hot, oat milk, no sugar, etc."></textarea>
+        <div class="menu-item">
+            <span class="item-name">Coffee</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Coffee">
+        </div>
 
-        <button type="submit">Place Order</button>
+        <div class="menu-item">
+            <span class="item-name">Tea</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Tea">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Water</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Water">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Apple & Blackcurrant Squash</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Apple & Blackcurrant Squash">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Orange & Pineapple Squash</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Orange & Pineapple Squash">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Cola</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Cola">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Milk</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Milk">
+        </div>
+
+
+        <h3>🍪 Snacks</h3>
+
+        <div class="menu-item">
+            <span class="item-name">Ritz Crackers</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Ritz Crackers">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Pom Bears</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Pom Bears">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Crackers & Butter</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Crackers & Butter">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Fruit Salad</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Fruit Salad">
+        </div>
+
+
+        <h3>🥣 Breakfast</h3>
+
+        <div class="menu-item">
+            <span class="item-name">Toast</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Toast">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Shreddies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Shreddies">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Chocolate Shreddies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Chocolate Shreddies">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Rice Krispies</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Rice Krispies">
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">Porridge</span>
+            <input class="qty" type="number" min="0" value="0"
+                   data-item="Porridge">
+        </div>
+
+
+        <!-- SPECIAL INSTRUCTIONS -->
+
+        <h2>Special Instructions</h2>
+
+        <textarea
+            id="notes"
+            name="notes"
+            rows="4"
+            placeholder="Any special requests or dietary requirements?"
+        ></textarea>
+
+
+        <!-- SHOPPING CART -->
+
+        <h2>🛒 Order Summary</h2>
+
+        <div id="cart">
+            <p>No items selected.</p>
+        </div>
+
+        <div class="cart-total">
+            Total Items: <span id="totalItems">0</span>
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button type="submit" id="submitButton">
+            Place Order
+        </button>
+
+        <div id="message"></div>
 
     </form>
+
 </div>
 
 </body>
